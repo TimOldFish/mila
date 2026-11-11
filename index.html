@@ -40,7 +40,14 @@
 .gal__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero--photo .hero__text { max-width: 540px; }
 .hero--photo .hero-text { width: 100%; }
-/* glassmorphing на карточке hero */
+/* полупрозрачное верхнее меню */
+.nav {
+  background: rgba(230, 219, 199, 0.6);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom: 1px solid rgba(6, 43, 138, 0.14);
+  box-shadow: 0 8px 32px -16px rgba(6, 43, 138, 0.18);
+}
 .hero--photo .hero__text {
   background: rgba(230, 219, 199, 0.55);
   -webkit-backdrop-filter: blur(20px) saturate(1.3);
