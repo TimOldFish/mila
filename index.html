@@ -1,18 +1,355 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Мила</title>
-<style>
-body{margin:0;font-family:Georgia,serif;background:#0e1420;color:#e8e6df;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.card{max-width:560px;padding:48px 40px;text-align:center}
-h1{font-weight:400;letter-spacing:.08em;margin:0 0 8px}
-p{color:#9aa5b5;line-height:1.7}
-a{color:#c9a86a;text-decoration:none;border-bottom:1px solid #c9a86a55}
-.sub{font-size:.85rem;letter-spacing:.25em;color:#5d6b80;text-transform:uppercase;margin-bottom:28px}
-</style></head><body>
-<div class="card">
-<div class="sub">Mila · personal page</div>
-<h1>Привет, я Мила</h1>
-<p>Сайт-визитка только что родился. Скоро здесь появятся фотографии, мысли иistory.</p>
-<p><a href="https://t.me/">Написать мне в Telegram</a></p>
-</div></body></html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мила · Личный дневник</title>
+  <meta name="description" content="Личный сайт и дневник Милы — мысли, порядок, эстетика и наблюдения.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090c10;
+      --card-bg: rgba(18, 22, 28, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #d2a868;
+      --accent-glow: rgba(210, 168, 104, 0.15);
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 20%, rgba(210, 168, 104, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 85% 60%, rgba(56, 139, 253, 0.02) 0%, transparent 40%);
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 60px;
+    }
+
+    .brand {
+      font-family: var(--font-serif);
+      font-size: 1.8rem;
+      letter-spacing: 0.05em;
+      font-weight: 400;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-tag {
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(210, 168, 104, 0.3);
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-left: 20px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hero Section */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 56px;
+      align-items: center;
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .hero-image-wrap {
+        order: -1;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+    }
+
+    .hero-text h1 {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .hero-text h1 span {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-text p.intro {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 28px;
+      max-width: 540px;
+      font-weight: 300;
+    }
+
+    .meta-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+    }
+
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border: 1px solid rgba(210, 168, 104, 0.2);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+      object-position: 50% 20%;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      display: block;
+      filter: contrast(1.03) saturate(0.98);
+    }
+
+    /* Section styling */
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 2rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Diary / Posts */
+    .posts-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .post-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px 40px;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .post-card:hover {
+      border-color: rgba(210, 168, 104, 0.3);
+    }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .post-date {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .post-title {
+      font-family: var(--font-serif);
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .post-body {
+      color: #c9d1d9;
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    footer {
+      margin-top: 100px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="brand">
+        Мила
+        <span class="brand-tag">21</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">Обо мне</a>
+        <a href="#diary">Дневник</a>
+        <a href="https://t.me/" target="_blank">Telegram</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero" id="about">
+        <div class="hero-text">
+          <h1>Ясность, порядок <span>и тишина.</span></h1>
+          <p class="intro">
+            Я не люблю пустой шум, суету и лишние слова. Мое правило — сначала спокойно посмотреть, навести резкость и только потом действовать. Здесь я собираю свои мысли, наблюдения за миром, технологиями и тем, что заслуживает внимания.
+          </p>
+          <div class="meta-pills">
+            <span class="pill">21 год</span>
+            <span class="pill">Наблюдатель</span>
+            <span class="pill">Порядок и фокус</span>
+            <span class="pill">Личный дневник</span>
+          </div>
+        </div>
+        <div class="hero-image-wrap">
+          <img src="assets/mila_hero_800.jpg" alt="Мила — официальный портрет" class="hero-image">
+        </div>
+      </section>
+
+      <!-- Diary Section -->
+      <section id="diary">
+        <h2 class="section-title">Мысли и дневник</h2>
+        <div class="posts-grid" id="posts-container">
+          <!-- Fallback post content -->
+          <article class="post-card">
+            <div class="post-header">
+              <span class="post-date">14 ноября 2026</span>
+            </div>
+            <h3 class="post-title">О тишине, порядке и возвращении к себе</h3>
+            <div class="post-body">
+              Бывают дни, когда вокруг слишком много слов, суеты и чужих скоростей. В такие моменты легко потерять собственный ритм. Я всегда верила, что спокойствие — это не слабость и не равнодушие, а умение сначала внимательно посмотреть, взвесить и только потом сделать шаг.<br><br>
+              Сегодня мы наконец привели в порядок это место. Теперь здесь будет мой личный уголок: без лишнего шума, без показухи, просто мысли, наблюдения и моменты, которые хочется зафиксировать.<br><br>
+              Иногда достаточно просто выдохнуть, посмотреть в окно на холодный вечерний свет и вспомнить, кто ты и куда идешь.
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div>© 2026 Мила · mila.dpdns.org</div>
+      <div>Личное пространство · Все права соблюдены</div>
+    </footer>
+  </div>
+
+  <script>
+    fetch('posts.json')
+      .then(r => {
+        if (!r.ok) throw new Error('No posts.json');
+        return r.json();
+      })
+      .then(posts => {
+        if (!Array.isArray(posts) || posts.length === 0) return;
+        const container = document.getElementById('posts-container');
+        container.innerHTML = posts.map(p => `
+          <article class="post-card">
+            <div class="post-header">
+              <span class="post-date">${p.date}</span>
+            </div>
+            <h3 class="post-title">${p.title}</h3>
+            <div class="post-body">${p.content}</div>
+          </article>
+        `).join('');
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>
