@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Мила — Галерея</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#090c10; --ink:#e8e4dc; --dim:#8a8578; --gold:#d2a868; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; min-height:100vh; }
+  header { text-align:center; padding:48px 20px 8px; }
+  header h1 { font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:clamp(2rem,6vw,3.2rem); color:var(--gold); letter-spacing:.04em; }
+  header p { color:var(--dim); font-size:.85rem; margin-top:6px; letter-spacing:.12em; text-transform:uppercase; }
+  .grid { columns: 4 220px; column-gap:12px; padding:28px 16px 60px; max-width:1400px; margin:0 auto; }
+  .grid a { display:block; break-inside:avoid; margin-bottom:12px; border-radius:10px; overflow:hidden; background:#10151c; }
+  .grid img { width:100%; display:block; transition:opacity .25s; }
+  .grid a:hover img { opacity:.85; }
+  .lb { position:fixed; inset:0; background:rgba(5,7,10,.96); display:none; align-items:center; justify-content:center; z-index:10; cursor:zoom-out; }
+  .lb.on { display:flex; }
+  .lb img { max-width:94vw; max-height:94vh; border-radius:8px; }
+  .lb .nav { position:absolute; top:50%; transform:translateY(-50%); font-size:2.4rem; color:var(--dim); padding:24px; user-select:none; cursor:pointer; }
+  .lb .nav:hover { color:var(--gold); }
+  .lb .prev { left:6px; } .lb .next { right:6px; }
+  .lb .x { position:absolute; top:14px; right:22px; font-size:1.8rem; color:var(--dim); cursor:pointer; }
+  .lb .x:hover { color:var(--gold); }
+  footer { text-align:center; color:var(--dim); font-size:.75rem; padding:0 0 40px; letter-spacing:.1em; }
+  footer a { color:var(--dim); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Мила</h1>
+  <p>галерея</p>
+</header>
+<div class="grid" id="g"></div>
+<footer><a href="/">← на главную</a></footer>
+<div class="lb" id="lb">
+  <span class="x" id="x">✕</span>
+  <span class="nav prev" id="pv">‹</span>
+  <img id="lbi" alt="">
+  <span class="nav next" id="nx">›</span>
+</div>
+<script>
+const G='gallery/', T=G+'thumbs/', F=G+'full/';
+let idx=0, list=[];
+fetch(G+'manifest.json').then(r=>r.json()).then(m=>{
+  list=m; const g=document.getElementById('g');
+  m.forEach((it,i)=>{
+    const a=document.createElement('a');
+    a.innerHTML=`<img loading="lazy" src="${T}${it.f.replace(/\.\w+$/,'.jpg')}" alt="">`;
+    a.onclick=e=>{e.preventDefault();open(i)};
+    g.appendChild(a);
+  });
+});
+function open(i){idx=i;document.getElementById('lb').classList.add('on');
+  document.getElementById('lbi').src=F+list[i].f;}
+function move(d){open((idx+d+list.length)%list.length)}
+document.getElementById('x').onclick=()=>document.getElementById('lb').classList.remove('on');
+document.getElementById('pv').onclick=e=>{e.stopPropagation();move(-1)};
+document.getElementById('nx').onclick=e=>{e.stopPropagation();move(1)};
+document.getElementById('lb').onclick=()=>document.getElementById('lb').classList.remove('on');
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('on'))return;
+  if(e.key==='Escape')document.getElementById('lb').classList.remove('on');
+  if(e.key==='ArrowLeft')move(-1);
+  if(e.key==='ArrowRight')move(1);
+});
+</script>
+</body>
+</html>
