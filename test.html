@@ -15,6 +15,10 @@
   --pale-blue:#E1F3FE; --blue:#1F6C9F;
   --pale-green:#EDF3EC; --green:#346538;
   --pale-yellow:#FBF3DB; --yellow:#956400;
+  --r-s:8px; --r-m:14px; --r-l:18px;
+  --sh-1:0 1px 2px rgba(90,70,50,.05);
+  --sh-2:0 2px 6px rgba(90,70,50,.05), 0 12px 32px -8px rgba(90,70,50,.09);
+  --sh-3:0 2px 4px rgba(90,70,50,.05), 0 16px 40px -10px rgba(90,70,50,.11), 0 40px 90px -30px rgba(90,70,50,.13);
   --serif:'Newsreader',Georgia,serif;
   --sans:'Geist','Helvetica Neue',system-ui,sans-serif;
   --mono:'Geist Mono','SF Mono',monospace;
@@ -28,7 +32,7 @@ p,li,figcaption{text-wrap:pretty}
 section{padding:140px 0;border-bottom:1px solid var(--line)}
 /* ambient */
 .ambient{position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:radial-gradient(700px 480px at 85% 8%, rgba(214,178,120,.08), transparent 70%),
+  background:radial-gradient(700px 480px at 88% 22%, rgba(214,178,120,.07), transparent 70%),
              radial-gradient(500px 350px at 10% 80%, rgba(120,150,180,.04), transparent 70%);
   animation:drift 26s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(-24px,18px)}}
@@ -53,18 +57,19 @@ nav a:hover{color:var(--ink)}
   border-radius:6px;text-decoration:none;transition:background .2s,transform .15s;cursor:pointer}
 .btn:hover{background:#333}
 .btn:active{transform:scale(.98)}
-.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.btn.ghost:hover{border-color:var(--ink);background:transparent}
-.hero-photo{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--surface);box-shadow:0 1px 2px rgba(30,25,15,.04), 0 12px 40px -8px rgba(30,25,15,.10), 0 32px 80px -24px rgba(30,25,15,.12)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid #D8D5CE}
+.btn.ghost:hover{border-color:var(--ink);background:rgba(255,255,255,.6)}
+.hero-photo{position:relative;border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;background:var(--surface);box-shadow:var(--sh-3)}
 .hero-photo img{display:block;width:100%;height:auto;filter:saturate(.88) contrast(.98)}
 .hero-photo::after{content:'';position:absolute;inset:0;box-shadow:inset 0 0 80px rgba(60,45,20,.07);pointer-events:none}
-.hero-photo figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.9);
-  border:1px solid var(--line);border-radius:6px;padding:4px 10px;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.hero-photo figcaption{position:absolute;left:12px;bottom:12px;background:rgba(255,255,255,.72);
+  border:1px solid rgba(234,231,224,.8);border-radius:var(--r-s);padding:3px 9px;font-family:var(--mono);font-size:10px;color:var(--muted);transition:opacity .25s;opacity:.75}
+.hero-photo:hover figcaption{opacity:1;background:rgba(255,255,255,.92)}
 /* bento */
 .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;position:relative;z-index:1}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:36px 32px;
+.card{background:var(--surface);border:1px solid rgba(234,231,224,.9);border-radius:var(--r-m);box-shadow:var(--sh-1);padding:36px 32px;
   transition:box-shadow .2s;min-height:150px;display:flex;flex-direction:column}
-.card:hover{box-shadow:0 6px 24px rgba(30,25,15,.07), 0 1px 2px rgba(30,25,15,.04);transform:translateY(-2px)}
+.card:hover{box-shadow:var(--sh-2);transform:translateY(-3px)}
 .card h3{font-size:20px;margin-bottom:8px}
 .card p{color:var(--muted);font-size:14px}
 .card .num{font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px}
